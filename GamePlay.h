@@ -22,6 +22,7 @@ public:
     GamePlay(int height,int width,QWidget *parent=0);
     ~GamePlay();
     void checkValid();
+    void checkValidCpu();
     void paint();
     void changeB(int,int);
     void changeW(int,int);
