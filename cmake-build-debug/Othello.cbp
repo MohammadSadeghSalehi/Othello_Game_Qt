@@ -135,6 +135,9 @@
 		<Unit filename="/home/mss/CLionProjects/Othello/cmake-build-debug/Othello_autogen/moc_compilation.cpp">
 			<Option target="Othello"/>
 		</Unit>
+		<Unit filename="/home/mss/CLionProjects/Othello/cpu.h">
+			<Option target="Othello"/>
+		</Unit>
 		<Unit filename="/home/mss/CLionProjects/Othello/main.cpp">
 			<Option target="Othello"/>
 		</Unit>

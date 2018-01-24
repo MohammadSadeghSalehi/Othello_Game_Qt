@@ -1,5 +1,5 @@
 set(AM_SOURCES "/home/mss/CLionProjects/Othello/main.cpp;/home/mss/CLionProjects/Othello/MainWindow.cpp;/home/mss/CLionProjects/Othello/GamePlay.cpp")
-set(AM_HEADERS "/home/mss/CLionProjects/Othello/GamePlay.h;/home/mss/CLionProjects/Othello/MainWindow.h")
+set(AM_HEADERS "/home/mss/CLionProjects/Othello/GamePlay.h;/home/mss/CLionProjects/Othello/MainWindow.h;/home/mss/CLionProjects/Othello/cpu.h")
 set(AM_SKIP_MOC "")
 set(AM_SKIP_UIC )
 set(AM_MOC_COMPILE_DEFINITIONS "QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WIDGETS_LIB")
