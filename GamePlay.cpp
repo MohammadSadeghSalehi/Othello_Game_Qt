@@ -3,6 +3,7 @@
 //
 #include "GamePlay.h"
 #include <string>
+#include <ctime>
 #include <QtCore/qcoreapplication.h>
 #include <QtWidgets/QApplication>
 using namespace std;
@@ -39,7 +40,7 @@ GamePlay::GamePlay(int height, int width, QWidget *parent) {
             plate[i][j]->setStyleSheet("background-color: rgba(0,0,0,0%);border-radius:25px;");
 
             handler[i][j]=-1;
-            temp[i][j]=0;
+            temp[i][j]=-1;
         }
     }
     plate[3][3]->setGeometry(52+(3*50),102+(50*3),46,46);plate[4][3]->setGeometry(52+(3*50),102+(50*4),46,46);
@@ -363,7 +364,122 @@ void GamePlay::reset(int x,int y) {
             if(temp[i][j]==1) {
                 piece[i][j]->setStyleSheet("background-color: green;border: 0.5px solid black;");
             }
-            temp[i][j]=0;
+            temp[i][j]=-1;
+        }
+    }
+}
+void GamePlay::cpu() {
+    if(counter<60) {
+        checkValidCpu();
+
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++)
+            {
+                if(temp[i][j]==0)
+                {
+
+                    handler[i][j]=0;
+                    changeW(i,j);
+                    reset(i,j);
+                    break;
+                }
+            }
+        }
+        paint();
+        run();
+    }
+}
+void GamePlay::run() {
+
+    checkValid();
+    hint();
+    //  QEventLoop * e = QApplication::eventLoop();
+    // e->processEvents(QEventLoop::AllEvents);
+    counter++;
+
+}
+
+void GamePlay::checkValidCpu() {
+    int x=0,y=0;
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<8;j++)
+        {
+            if(handler[i][j]==0)
+            {   x=i;y=j;
+                while(handler[x][y]!=-1&&x<8)
+                {
+                    x++;
+                    if(handler[x][y]==1&&x<7&&handler[++x][y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&x>=0)
+                {
+                    x--;
+                    if(handler[x][y]==1&&x>0&&handler[--x][y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y<8)
+                {
+                    y++;
+                    if(handler[x][y]==1&&x<7&&handler[x][++y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y>=0)
+                {
+                    y--;
+                    if(handler[x][y]==1&&x>0&&handler[x][--y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y>=0&&x>=0)
+                {
+                    y--;x--;
+                    if(handler[x][y]==1&&x>0&&y>0&&handler[--x][--y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y<8&&x<8)
+                {
+                    y++;x++;
+                    if(handler[x][y]==1&&x<7&&y<7&&handler[++x][++y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y<8&&x>=0)
+                {
+                    y++;x--;
+                    if(handler[x][y]==1&&x>0&&y<7&&handler[--x][++y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+                x=i;y=j;
+                while(handler[x][y]!=-1&&y>=0&&x<8)
+                {
+                    y--;x++;
+                    if(handler[x][y]==1&&x<7&&y>0&&handler[++x][--y]==-1)
+                    {
+                        temp[x][y]=0;
+                    }
+                }
+            }
         }
     }
 }
@@ -1135,106 +1251,6 @@ void GamePlay::click77() {
         cpu();
     }
 }
-void GamePlay::cpu() {
-if(counter<60) {
-    checkValidCpu();
-    
 
-    run();
-}
-}
-void GamePlay::run() {
-
-        checkValid();
-        hint();
-      //  QEventLoop * e = QApplication::eventLoop();
-       // e->processEvents(QEventLoop::AllEvents);
-        counter++;
-
-}
-
-void GamePlay::checkValidCpu() {
-    int x=0,y=0;
-    for(int i=0;i<8;i++)
-    {
-        for(int j=0;j<8;j++)
-        {
-            if(handler[i][j]==0)
-            {   x=i;y=j;
-                while(handler[x][y]!=-1&&x<8)
-                {
-                    x++;
-                    if(handler[x][y]==1&&x<7&&handler[++x][y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&x>=0)
-                {
-                    x--;
-                    if(handler[x][y]==1&&x>0&&handler[--x][y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y<8)
-                {
-                    y++;
-                    if(handler[x][y]==1&&x<7&&handler[x][++y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0)
-                {
-                    y--;
-                    if(handler[x][y]==1&&x>0&&handler[x][--y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0&&x>=0)
-                {
-                    y--;x--;
-                    if(handler[x][y]==1&&x>0&&y>0&&handler[--x][--y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y<8&&x<8)
-                {
-                    y++;x++;
-                    if(handler[x][y]==1&&x<7&&y<7&&handler[++x][++y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y<8&&x>=0)
-                {
-                    y++;x--;
-                    if(handler[x][y]==1&&x>0&&y<7&&handler[--x][++y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-                x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0&&x<8)
-                {
-                    y--;x++;
-                    if(handler[x][y]==1&&x<7&&y>0&&handler[++x][--y]==-1)
-                    {
-                        temp[x][y]=0;
-                    }
-                }
-            }
-        }
-    }
-}
 
 
