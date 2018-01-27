@@ -14,11 +14,12 @@
   <component name="ChangeListManager">
     <list default="true" id="783dc8f6-4055-49a9-9c95-8e1cb2a3736c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/GamePlay.cpp.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/GamePlay.cpp.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/MainWindow.cpp.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/MainWindow.cpp.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/Othello_autogen/moc_compilation.cpp.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/Othello_autogen/moc_compilation.cpp.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/Othello" afterPath="$PROJECT_DIR$/cmake-build-debug/Othello" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GamePlay.cpp" afterPath="$PROJECT_DIR$/GamePlay.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/CXX.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Othello.dir/CXX.includecache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GamePlay.h" afterPath="$PROJECT_DIR$/GamePlay.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +44,8 @@
       <file leaf-file-name="GamePlay.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GamePlay.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+            <state relative-caret-position="918">
+              <caret line="51" column="12" lean-forward="false" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="54" />
               <folding>
                 <element signature="e#90#108#0" expanded="true" />
               </folding>
@@ -55,8 +56,8 @@
       <file leaf-file-name="GamePlay.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GamePlay.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="229" column="16" lean-forward="true" selection-start-line="229" selection-start-column="16" selection-end-line="229" selection-end-column="16" />
+            <state relative-caret-position="304">
+              <caret line="652" column="21" lean-forward="false" selection-start-line="652" selection-start-column="21" selection-end-line="652" selection-end-column="21" />
               <folding>
                 <element signature="e#44#65#0" expanded="true" />
               </folding>
@@ -220,7 +221,11 @@
       <workItem from="1516636461147" duration="636000" />
       <workItem from="1516785783679" duration="7360000" />
       <workItem from="1516808355290" duration="3916000" />
-      <workItem from="1516894439251" duration="1760000" />
+      <workItem from="1516894439251" duration="19220000" />
+      <workItem from="1516949953209" duration="7353000" />
+      <workItem from="1516962502319" duration="598000" />
+      <workItem from="1516980784362" duration="7699000" />
+      <workItem from="1517051543949" duration="195000" />
     </task>
     <task id="LOCAL-00001" summary="Menu created and gamePlay linked to menu">
       <created>1515443851842</created>
@@ -257,11 +262,18 @@
       <option name="project" value="LOCAL" />
       <updated>1516799604454</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="first cpu AI(random) created">
+      <created>1516897449906</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1516897449906</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89455000" />
+    <option name="totallyTimeSpent" value="122760000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="381" y="110" width="1366" height="743" extended-state="6" />
@@ -272,12 +284,12 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36535433" sideWeight="0.4465593" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28976378" sideWeight="0.54172766" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28976378" sideWeight="0.45827234" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -299,7 +311,8 @@
     <MESSAGE value="gamePlay UI" />
     <MESSAGE value="player actions completed" />
     <MESSAGE value="checkValid and change formed for cpu" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkValid and change formed for cpu" />
+    <MESSAGE value="first cpu AI(random) created" />
+    <option name="LAST_COMMIT_MESSAGE" value="first cpu AI(random) created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -687,8 +700,8 @@
     <entry file="file://$PROJECT_DIR$/cpu.h" />
     <entry file="file://$PROJECT_DIR$/GamePlay.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        <state relative-caret-position="918">
+          <caret line="51" column="12" lean-forward="false" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="54" />
           <folding>
             <element signature="e#90#108#0" expanded="true" />
           </folding>
@@ -697,8 +710,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GamePlay.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="229" column="16" lean-forward="true" selection-start-line="229" selection-start-column="16" selection-end-line="229" selection-end-column="16" />
+        <state relative-caret-position="304">
+          <caret line="652" column="21" lean-forward="false" selection-start-line="652" selection-start-column="21" selection-end-line="652" selection-end-column="21" />
           <folding>
             <element signature="e#44#65#0" expanded="true" />
           </folding>

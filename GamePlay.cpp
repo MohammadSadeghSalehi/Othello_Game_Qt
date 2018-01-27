@@ -16,8 +16,6 @@ GamePlay::GamePlay(int height, int width, QWidget *parent) {
     this->setAutoFillBackground(true);
     this->setPalette(palette1);
 
-    str1=str1+cScore;
-    str2=str2+pScore;
     cpuScore=new QLabel(str1,this);
     cpuScore->setGeometry(50,10,120,40);
     cpuScore->setStyleSheet("background-color: gray;border-radius:10px;");
@@ -131,43 +129,43 @@ void GamePlay::checkValid() {
         {
             if(handler[i][j]==1)
             {   x=i;y=j;
-                while(handler[x][y]!=-1&&x<8)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     x++;
-                    if(handler[x][y]==0&&x<7&&handler[++x][y]==-1)
+                    if(handler[x][y]==0&&x<7&&y<8&&handler[++x][y]==-1)
                     {
                         temp[x][y]=1;
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&x>=0)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     x--;
-                    if(handler[x][y]==0&&x>0&&handler[--x][y]==-1)
+                    if(handler[x][y]==0&&x>0&&y>=0&&handler[--x][y]==-1)
                     {
                         temp[x][y]=1;
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y<8)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y++;
-                    if(handler[x][y]==0&&x<7&&handler[x][++y]==-1)
+                    if(handler[x][y]==0&&x<8&&y<7&&handler[x][++y]==-1)
                     {
                         temp[x][y]=1;
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y--;
-                    if(handler[x][y]==0&&x>0&&handler[x][--y]==-1)
+                    if(handler[x][y]==0&&x>=0&&y>0&&handler[x][--y]==-1)
                     {
                         temp[x][y]=1;
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0&&x>=0)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y--;x--;
                     if(handler[x][y]==0&&x>0&&y>0&&handler[--x][--y]==-1)
@@ -176,7 +174,7 @@ void GamePlay::checkValid() {
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y<8&&x<8)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y++;x++;
                     if(handler[x][y]==0&&x<7&&y<7&&handler[++x][++y]==-1)
@@ -185,7 +183,7 @@ void GamePlay::checkValid() {
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y<8&&x>=0)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y++;x--;
                     if(handler[x][y]==0&&x>0&&y<7&&handler[--x][++y]==-1)
@@ -194,7 +192,7 @@ void GamePlay::checkValid() {
                     }
                 }
                 x=i;y=j;
-                while(handler[x][y]!=-1&&y>=0&&x<8)
+                while(handler[x][y]!=-1&&x<8&&y<8&&x>=0&&y>=0)
                 {
                     y--;x++;
                     if(handler[x][y]==0&&x<7&&y>0&&handler[++x][--y]==-1)
@@ -208,151 +206,362 @@ void GamePlay::checkValid() {
     }
 
 void GamePlay::paint() {
+    cScore=0;pScore=0;
     for(int i=0;i<8;i++)
     {
         for(int j=0;j<8;j++)
         {
             if(handler[i][j]==0)
             {
+                cScore++;
                 plate[i][j]->setGeometry(52+(j*50),102+(50*i),46,46);
                 plate[i][j]->setStyleSheet("background-color: white;border-radius:23px;");
             }
             else if(handler[i][j]==1)
             {
+                pScore++;
                 plate[i][j]->setGeometry(52+(j*50),102+(50*i),46,46);
                 plate[i][j]->setStyleSheet("background-color: black;border-radius:23px;");
             }
         }
     }
+    if(cScore>9)
+    {
+        cScored2=(cScore%10)+48;
+        cScored1=(cScore/10)+48;
+    }
+    else{
+    cScored1='0';cScored2=cScore+48;
+    }
+    if(pScore>9)
+    {
+        pScored2=(pScore%10)+48;
+        pScored1=(pScore/10)+48;
+    }
+    else{
+        pScored1='0';pScored2=pScore+48;
+    }
+    str1= "cpu score: ";str2="player score: ";
+    cS1=cScored1;cS2=cScored2;pS1=pScored1;pS2=pScored2;
+    str1=str1+cS1;str1=str1+cS2;
+    str2=str2+pS1;str2=str2+pS2;
+    cpuScore->setText(str1);
+    playerScore->setText(str2);
 }
 
 void GamePlay::changeB(int x,int y) {
-int i=x;int j=y;
+    int i=x;int j=y;int count=0;
     i++;
-    while(handler[i][j]==0&&i<8)
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
     {
-        handler[i][j]=1;
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v1= true;break;}
+
         i++;
     }
-    i=x;j=y;
-    i--;
-    while(handler[i][j]==0&&i>=0)
+    i=x;j=y;i++;
+    while (count!=0&&v1)
     {
         handler[i][j]=1;
+        count--;
+        i++;
+    }
+    i=x;j=y;count=0;
+    i--;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v2= true;break;}
+        i--;
+    }
+    i=x;j=y;i--;
+    while (count!=0&&v2)
+    {
+        handler[i][j]=1;
+        count--;
         i--;
     }
     i=x;j=y;
-    j--;
-    while(handler[i][j]==0&&j>=0)
+    j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v3= true;break;}
+        j--;
+    }
+    i=x;j=y;j--;
+    while (count!=0&&v3)
     {
         handler[i][j]=1;
+        count--;
         j--;
     }
     i=x;j=y;
-    j++;
-    while(handler[i][j]==0&&j<8)
+    j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v4= true;break;}
+        j++;
+    }
+    i=x;j=y;j++;
+    while (count!=0&&v4)
     {
         handler[i][j]=1;
+        count--;
         j++;
     }
     i=x;j=y;
-    i--;j--;
-    while(handler[i][j]==0&&i>=0&&j>=0)
+    i--;j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v5= true;break;}
+        i--;j--;
+    }
+    i=x;j=y;i--;j--;
+    while (count!=0&&v5)
     {
         handler[i][j]=1;
+        count--;
         i--;j--;
     }
     i=x;j=y;
-    i++;j++;
-    while(handler[i][j]==0&&i<8&&j<8)
+    i++;j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v6= true;break;}
+        i++;j++;
+    }
+    i=x;j=y;i++;j++;
+    while (count!=0&&v6)
     {
         handler[i][j]=1;
+        count--;
         i++;j++;
     }
     i=x;j=y;
-    i--;j++;
-    while(handler[i][j]==0&&i>=0&&j<8)
+    i--;j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v7= true;break;}
+        i--;j++;
+    }
+    i=x;j=y;i--;j++;
+    while (count!=0&&v7)
     {
         handler[i][j]=1;
+        count--;
         i--;j++;
     }
     i=x;j=y;
-    i++;j--;
-    while(handler[i][j]==0&&i<8&&j>=0)
+    i++;j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
     {
-        handler[i][j]=1;
+        count++;
+        if(count==1&&handler[i][j]==1)
+        { break;count--;}
+        else if(handler[i][j]==1)
+        { v8= true;break;}
         i++;j--;
     }
+    i=x;j=y;i++;j--;
+    while (count!=0&&v8)
+    {
+        handler[i][j]=1;
+        count--;
+        i++;j--;
+    }
+    v1=0;v2=0;v3=0;v4=0;v5=0;v6=0;v7=0;v8=0;
 }
 
 void GamePlay::changeW(int x, int y) {
-    int i=x;int j=y;
+    int i=x;int j=y;int count=0;
     i++;
-    while(handler[i][j]==1&&i<8)
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
     {
-        handler[i][j]=0;
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v1= true;break;}
+
         i++;
     }
-    i=x;j=y;
-    i--;
-    while(handler[i][j]==1&&i>=0)
+    i=x;j=y;i++;
+    while (count!=0&&v1)
     {
         handler[i][j]=0;
+        count--;
+        i++;
+    }
+    i=x;j=y;count=0;
+    i--;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v2= true;break;}
+        i--;
+    }
+    i=x;j=y;i--;
+    while (count!=0&&v2)
+    {
+        handler[i][j]=0;
+        count--;
         i--;
     }
     i=x;j=y;
-    j--;
-    while(handler[i][j]==1&&j>=0)
+    j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v3= true;break;}
+        j--;
+    }
+    i=x;j=y;j--;
+    while (count!=0&&v3)
     {
         handler[i][j]=0;
+        count--;
         j--;
     }
     i=x;j=y;
-    j++;
-    while(handler[i][j]==1&&j<8)
+    j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v4= true;break;}
+        j++;
+    }
+    i=x;j=y;j++;
+    while (count!=0&&v4)
     {
         handler[i][j]=0;
+        count--;
         j++;
     }
     i=x;j=y;
-    i--;j--;
-    while(handler[i][j]==1&&i>=0&&j>=0)
+    i--;j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v5= true;break;}
+        i--;j--;
+    }
+    i=x;j=y;i--;j--;
+    while (count!=0&&v5)
     {
         handler[i][j]=0;
+        count--;
         i--;j--;
     }
     i=x;j=y;
-    i++;j++;
-    while(handler[i][j]==1&&i<8&&j<8)
+    i++;j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v6= true;break;}
+        i++;j++;
+    }
+    i=x;j=y;i++;j++;
+    while (count!=0&&v6)
     {
         handler[i][j]=0;
+        count--;
         i++;j++;
     }
     i=x;j=y;
-    i--;j++;
-    while(handler[i][j]==1&&i>=0&&j<8)
+    i--;j++;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
+    {
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v7= true;break;}
+        i--;j++;
+    }
+    i=x;j=y;i--;j++;
+    while (count!=0&&v7)
     {
         handler[i][j]=0;
+        count--;
         i--;j++;
     }
     i=x;j=y;
-    i++;j--;
-    while(handler[i][j]==1&&i<8&&j>=0)
+    i++;j--;count=0;
+    while((handler[i][j]==0||handler[i][j]==1)&&i<8&&j<8&&i>=0&&j>=0)
     {
-        handler[i][j]=0;
+        count++;
+        if(count==1&&handler[i][j]==0)
+        { break;count--;}
+        else if(handler[i][j]==0)
+        { v8= true;break;}
         i++;j--;
     }
+    i=x;j=y;i++;j--;
+    while (count!=0&&v8)
+    {
+        handler[i][j]=0;
+        count--;
+        i++;j--;
+    }
+    v1=0;v2=0;v3=0;v4=0;v5=0;v6=0;v7=0;v8=0;
 }
 
 void GamePlay::hint() {
+    bool nothing=true;
     for(int i=0;i<8;i++)
     {
         for(int j=0;j<8;j++)
         {
             if(temp[i][j]==1) {
                 piece[i][j]->setStyleSheet("background-color: blue;");
+                nothing= false;
             }
         }
+    }
+    if(nothing)
+    {
+        cpu();
     }
 }
 
@@ -367,9 +576,10 @@ void GamePlay::reset(int x,int y) {
             temp[i][j]=-1;
         }
     }
+    v1=0;v2=0;v3=0;v4=0;v5=0;v6=0;v7=0;v8=0;
 }
 void GamePlay::cpu() {
-    if(counter<60) {
+    if(cScore+pScore<64) {
         checkValidCpu();
 
         for(int i=0;i<8;i++)
@@ -386,17 +596,43 @@ void GamePlay::cpu() {
                 }
             }
         }
+        counter++;
         paint();
         run();
+    }
+    else
+    {
+        QMessageBox msgBox;
+        if(pScore>cScore) {
+            msgBox.setText("               You won              ");
+        } else if(pScore<cScore){
+            msgBox.setText("               CPU won              ");
+        } else{
+            msgBox.setText("               Draw              ");
+        }
+        msgBox.exec();
     }
 }
 void GamePlay::run() {
 
     checkValid();
     hint();
-    //  QEventLoop * e = QApplication::eventLoop();
-    // e->processEvents(QEventLoop::AllEvents);
-    counter++;
+    bool va=false;
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<8;j++)
+        {
+            if(temp[i][j]==1)
+            {
+               va= true;
+            }
+        }
+    }
+    if(!va)
+    {
+        reset(0,0);
+        cpu();
+    }
 
 }
 
@@ -411,7 +647,7 @@ void GamePlay::checkValidCpu() {
                 while(handler[x][y]!=-1&&x<8)
                 {
                     x++;
-                    if(handler[x][y]==1&&x<7&&handler[++x][y]==-1)
+                    if(handler[x][y]==1&&x<7&&y<8&&handler[++x][y]==-1)
                     {
                         temp[x][y]=0;
                     }
@@ -420,7 +656,7 @@ void GamePlay::checkValidCpu() {
                 while(handler[x][y]!=-1&&x>=0)
                 {
                     x--;
-                    if(handler[x][y]==1&&x>0&&handler[--x][y]==-1)
+                    if(handler[x][y]==1&&x>0&&y>=0&&handler[--x][y]==-1)
                     {
                         temp[x][y]=0;
                     }
@@ -429,7 +665,7 @@ void GamePlay::checkValidCpu() {
                 while(handler[x][y]!=-1&&y<8)
                 {
                     y++;
-                    if(handler[x][y]==1&&x<7&&handler[x][++y]==-1)
+                    if(handler[x][y]==1&&x<8&&y<7&&handler[x][++y]==-1)
                     {
                         temp[x][y]=0;
                     }
@@ -438,7 +674,7 @@ void GamePlay::checkValidCpu() {
                 while(handler[x][y]!=-1&&y>=0)
                 {
                     y--;
-                    if(handler[x][y]==1&&x>0&&handler[x][--y]==-1)
+                    if(handler[x][y]==1&&x>=0&&y>0&&handler[x][--y]==-1)
                     {
                         temp[x][y]=0;
                     }
